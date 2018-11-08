@@ -1,0 +1,36 @@
+<div id="blue">
+<H1 align="center">Bienvenue petit(e) curieux(euse)!</H1>
+<H2 align="center">Quel film souhaites-tu voir ?</H2>
+  <div align="center"><%= form_tag do  %>
+  <%= label_tag :movie_name, "Movie name :" %>
+  <%= text_field_tag :movie_name, nil, placeholder: 'Nom du film'%>
+  <%= submit_tag "Search" %>
+
+<% end %>
+</div>
+<div align="center">
+<% if @results && @results.count == 0%>
+  <h3 align="center"> il n'y a aucun résultat pour cette recherche 😟 !</h3>
+<% elsif @results %>
+<table>
+<thead>
+<tr>
+  <th>Titre</th>
+  <th>Date de sortie</th>
+  <th>Réalisateur</th>
+  <th>Image du film</th>
+</tr>
+</thead>
+<tbody>
+  <% @results.each do |result| %>
+    <tr>
+    <td><%= result["title"] %></td>
+    <td><%= result["date"] %></td>
+    <td><%= result["director"] %></td>
+    <td><img src="https://image.tmdb.org/t/p/w400<%=result["poster"]%>" style="width:104px;height:142px;"></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<% end %>
+</div>
